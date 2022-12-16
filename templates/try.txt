@@ -1,0 +1,25 @@
+from app.models import Post
+Post.objects.all()
+p = Post.objects.create(user_id=1,title="this is tittle",type_of_media=3, media=res )
+
+>>> file1 = open("/home/prathiksha/Documents/project/media/1.jpg")
+>>> file2 = open("/home/prathiksha/Documents/project/media/2.jpeg")
+>>> res1 = bytes(file1, 'utf-8')
+>>> res2 = bytes(file2, 'utf-8')
+>>> p1 = Post.objects.create(user_id=1,title="this is tittle1",type_of_media=1, media=res1 )
+>>> p2 = Post.objects.create(user_id=1,title="this is tittle2",type_of_media=1, media=res2 )
+>>> p1.media
+b'/home/prathiksha/Downloads/5.png'
+>>> p2.media
+b'/home/prathiksha/Downloads/6.png'
+>>> Post.objects.all()
+
+from app.models import Post
+from PIL import Image
+from io import BytesIO
+img = Image.open("/home/prathiksha/Downloads/6.png")
+buf = BytesIO()
+img.save(buf, 'jpeg')
+buf.seek(0)
+image_bytes = buf.read()
+buf.close()

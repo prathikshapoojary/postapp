@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <title>Document</title>
+
+<style>
+
+.logo{
+  color: black;
+  font-weight: 1000;
+  padding-left: 20px;
+  text-shadow:2px 2px  #0000003a;
+  font-family: system-ui;
+  font-size:x-large;
+}
+.tlogo{
+  color: #03C6C7;
+}
+* {
+    padding: 0;
+    margin: 0
+}
+
+.section {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #eee
+}
+
+.section .container {
+    height: 500px;
+    width: 800px;
+    background-color: #fff;
+    position: relative;
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1)
+}
+
+.section .container .form {
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    overflow: hidden;
+    position: absolute
+}
+
+.section .container .left-side {
+    width: 45%;
+    background-color: #fff;
+    height: 100%;
+    padding-right: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative
+}
+
+.section .container .left-side .brand {
+    position: absolute;
+    top: 20px;
+    left: 26px;
+    letter-spacing: 1px;
+    text-transform: uppercase
+}
+
+.section .container .left-side .form-inputs {
+    padding: 25px
+}
+
+.section .container .left-side .form-inputs input {
+    position: relative;
+    width: 100%;
+    height: 50px !important;
+    padding: 0px 10px;
+    color: #333;
+    border: 2px solid #eee;
+    outline: none;
+    margin: 5px 0;
+    box-shadow: none;
+    letter-spacing: 1px;
+    font-weight: 400;
+    font-size: 14px;
+    transition: all 0.5s;
+    background-color: #f5f5f5
+}
+
+.section .container .left-side .form-inputs input[type="submit"] {
+    cursor: pointer;
+    border: none;
+    background-color: #130329;
+    text-transform: uppercase;
+    width: 100px;
+    color: #fff;
+    margin-top: 22px
+}
+
+.section .container .left-side .form-inputs input[type="submit"]:hover {
+    background-color: red;
+    color: #fff
+}
+
+.section .container .left-side .form-inputs input:focus {
+    border: 2px solid #00000036
+}
+
+.section .container .left-side .form-inputs input[type="submit"]:focus {
+    border: none
+}
+
+.section .container .left-side .form-inputs .login-text {
+    margin-top: 10px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 12px;
+    color: #555
+}
+
+.random_password {
+    margin-top: 5px;
+    letter-spacing: 1px;
+    font-size: 9px
+}
+
+.form-inputs .password {
+    position: relative
+}
+
+.form-inputs .showpass {
+    width: 25px;
+    height: 25px;
+    background-color: #fff;
+    right: -13px;
+    top: 20px;
+    position: absolute;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center
+}
+
+.form-inputs .showpass img {
+    width: 15px;
+    transition: all 5s
+}
+
+.section .container .left-side .form-inputs p a {
+    text-decoration: none
+}
+
+.brand {
+    display: flex;
+    justify-content: center;
+    align-items: center
+}
+
+.brand img {
+    width: 20px
+}
+
+.brand small {
+    margin-left: 6px;
+    margin-top: 5px
+}
+
+.password p {
+    font-size: 15px;
+    position: absolute;
+    top: 58px;
+    left: 3px;
+    cursor: pointer;
+    display: none
+}
+
+.section .container .right-side {
+    width: 60%;
+    height: 100%;
+    position: relative;
+    background-color: #000000e3;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden
+}
+
+.right-side h2 {
+    font-size: 40px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: #fff;
+    z-index: 1000
+}
+
+.right-side .circle1 {
+    position: absolute;
+    height: 300px;
+    width: 300px;
+    background-color: #000;
+    border-radius: 50%;
+    top: -100px;
+    left: -100px;
+    transition: all 1s
+}
+
+.right-side .circle2 {
+    position: absolute;
+    height: 200px;
+    width: 200px;
+    background-color: #000;
+    border-radius: 50%;
+    top: 250px;
+    right: 50px;
+    transition: all 1s;
+    transition-delay: 3s
+}
+
+.right-side .circle3 {
+    position: absolute;
+    height: 100px;
+    width: 100px;
+    background-color: #000;
+    border-radius: 50%;
+    top: 50px;
+    right: 10px;
+    transition: all 1s;
+    transition-delay: 2s
+}
+
+.right-side:hover .circle1 {
+    height: 350px;
+    width: 350px
+}
+
+.right-side:hover .circle2 {
+    height: 250px;
+    width: 250px
+}
+
+.right-side:hover .circle3 {
+    height: 150px;
+    width: 150px
+}
+
+.section .container .right-side svg {
+    position: absolute;
+    bottom: 0
+}
+
+@media (max-width:750px) {
+    .section .container {
+        max-width: 350px
+    }
+
+    .section .container .right-side {
+        display: none
+    }
+
+    .section .container .left-side {
+        width: 100%
+    }
+}
+.button {
+  background-color: #4CAF50; /* Green */
+  border: none;
+  color: white;
+  padding: 12px 24px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  transition-duration: 0.4s;
+  cursor: pointer;
+}
+
+.button1 {
+  background-color: white; 
+  color: black; 
+  border: 2px solid #04baba;
+}
+
+.button1:hover {
+  background-color: white;
+  color: black;
+  border: 2px solid black;
+}
+</style>
+</head>
+
+<body>
+    {% block content %}
+    
+        {% if messages %}
+        
+            {% for message in messages %}
+            <div {% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            {% endfor %}
+        
+        {% endif %}
+    <div class="section"> 
+        <div class="container"> 
+            <div class="form"> 
+                <div class="left-side"> 
+                    <div> <span class="brand">
+                        <img src="https://i.imgur.com/zpXluzv.png"><small>    <p class="logo">pos<span class="tlogo">T</span>x </p>
+                        </small></span> 
+
+                        <form action="" method="POST"  class="form-inputs">
+                            {% csrf_token %}
+                            
+                            <div>
+                                <label for="username"></label>
+                                <input type="text" class="form-control" name="username" placeholder="Enter Username" required>
+                            </div>
+                            <br>
+                            <div >
+                                <div class="password"> 
+                                    <input id="password" type="password" name="password"placeholder="Password"> 
+                                    <span class="showpass" onclick="toggle()"> 
+                                        <img id="changepasseye" src="https://i.imgur.com/d1M6y1W.jpg"> </span> 
+                                       
+                                </div> 
+                            </div>
+                            <br>
+                            <button id="submit_button" class="button button1" type="submit"> Login</button><p class="login-text">Create a new account <a href="/project/register">Register Here</a></p>
+                           
+                        </form>
+                       
+                        </div> 
+                    </div> 
+                    <div class="right-side"> 
+                        <h2> POSTX</h2> 
+                        <span class="circle1"></span> 
+                        <span class="circle2"></span> 
+                        <span class="circle3"></span> 
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
+                            <path fill="#000" fill-opacity="1" d="M0,96L48,122.7C96,149,192,203,288,229.3C384,256,480,256,576,234.7C672,213,768,171,864,176C960,181,1056,235,1152,229.3C1248,224,1344,160,1392,128L1440,96L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path>
+                        </svg> 
+                    </div> 
+                </div> 
+            </div>
+</div>
+{% endblock %}
+
+
+<script>
+    var state = false;
+let password = document.getElementById('password');
+let submit_button = document.getElementById('submit_button');
+let changepasseye = document.getElementById('changepasseye');
+function toggle() {
+    if (state){
+        password.setAttribute("type", "password");
+        changepasseye.src="https://i.imgur.com/d1M6y1W.jpg";
+        state = false;
+    } else { 
+        password.setAttribute("type", "text");
+        changepasseye.src="https://i.imgur.com/i8SxZqd.jpg";
+        state = true;
+    }
+}
+
+
+let random_password = document.querySelector('.random_password');
+var passwordLength = 10;
+var passwordVal = "";
+
+window.onload = function loadPassword() {
+
+    let randomGenerateChars = "B&vp3hSMQQsu#sR2+mTJx6kf6kHhHk^nNceWW_$=tEG#";
+
+    for (var i = 0; i < passwordLength; i++) {
+        let randomNumber = Math.floor(Math.random() * randomGenerateChars.length);
+        passwordVal += randomGenerateChars.substring(randomNumber, randomNumber + 1);
+    }
+    random_password.innerHTML = "Password suggestion - "+passwordVal;
+};
+
+password.addEventListener('focus', function() { 
+   
+    if (password.value === '') {
+        random_password.style.display = 'block';
+        
+    }
+});
+
+
+random_password.addEventListener('click', function() {
+    password.value = passwordVal;
+    random_password.style.display = 'none';
+});
+</script>
+</body>
+</html>

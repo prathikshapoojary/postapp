@@ -1,0 +1,35 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Post App</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<style>
+  
+.logo{
+  color: black;
+  font-weight: 1000;
+  padding-left: 20px;
+  text-shadow:2px 2px  #0000003a;
+  /* font-family: "Goudy Bookletter 1911", sans-serif; */
+  font-family: system-ui;
+  font-size:larger;
+}
+.tlogo{
+  color: #03C6C7;
+}
+
+</style>
+</head>
+<body >
+  {% block content %}
+ 
+          <p class="logo">pos<span class="tlogo">T</span>x </p>
+ 
+          <a class="button button1" href="/project/login"><button type="button" class="btn btn-outline-info">Start posting</button></a>
+         
+  
+  {% endblock %}
+ 
+</body>
+</html>

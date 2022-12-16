@@ -1,0 +1,853 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+  <link href='https://css.gg/log-off.css' rel='stylesheet'>
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  <title>Post list</title>
+  <style>
+    @import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap");
+
+    body {
+      padding-top: 20px;
+    }
+
+    #box {
+      padding: 5px;
+      width: 310px;
+      z-index: 10;
+      position: relative;
+    }
+
+    #box form {
+      background: #ffffff5b;
+      padding: 5px;
+      display: none;
+      position: relative;
+      top: 2px;
+    }
+
+    #button {
+      font-size: 16px;
+      text-transform: uppercase;
+      letter-spacing: 0.5x;
+      font-weight: 500;
+      width: 75px;
+      background: rgba(0, 0, 0, 0.753);
+      color: #fff;
+      padding: 6px 12px;
+      border: 1px solid rgba(229, 229, 240, 0.753);
+      margin-bottom: 15px;
+      cursor: pointer;
+      align-content: space-between;
+      border-radius: 2px;
+    }
+
+    .post-editor,
+    .stream-post {
+      padding: .75rem;
+      background: #f7f7f9;
+      border: 1px solid #eceeef;
+      border-radius: .25rem;
+      margin-bottom: 1.5rem
+    }
+
+    .profile-wrapper {
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-orient: vertical;
+      -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+      flex-direction: column
+    }
+
+    @media (min-width:768px) {
+      .profile-wrapper {
+        -webkit-box-orient: horizontal;
+        -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+        flex-direction: row
+      }
+    }
+
+    body.menubar-top .profile-wrapper {
+      border: 1px solid #eceeef
+    }
+
+    .profile-section-user {
+      border-right: 1px solid #eceeef;
+      -webkit-box-flex: 0;
+      -ms-flex: 0 0 100%;
+      flex: 0 0 100%;
+
+    }
+
+    @media (min-width:768px) {
+      .profile-section-user {
+        -ms-flex-preferred-size: 34%;
+        flex-basis: 34%
+      }
+    }
+
+    @media (min-width:992px) {
+      .profile-section-user {
+        -ms-flex-preferred-size: 30%;
+        flex-basis: 30%
+      }
+    }
+
+    .profile-section-user table {
+      margin-bottom: 0
+    }
+
+    .profile-section-user table td {
+      border: none;
+      padding-left: 0;
+      padding-right: 0
+    }
+
+    .profile-section-user .img-gallery [class*=col] {
+      padding-right: .25rem;
+      padding-left: .25rem
+    }
+
+    .profile-section-user .img-gallery .row {
+      margin-right: -.25rem;
+      margin-left: -.25rem
+    }
+
+    .profile-section-user .img-gallery .g__item {
+      margin-bottom: .5rem
+    }
+
+    .profile-cover-img img {
+      width: 100%;
+      height: auto
+    }
+
+    .profile-info-brief {
+      position: relative;
+      padding-top: 74px !important;
+      background-color: rgb(252, 188, 188);
+
+    }
+
+    .profile-info-brief .user-profile-avatar {
+      width: 100px;
+      height: 100px;
+      border-radius: 100%;
+      position: absolute;
+      top: -50px;
+      left: calc(50% - 50px)
+    }
+
+    .profile-section-main {
+      -webkit-box-flex: 0;
+      -ms-flex: 0 1 5000px;
+      flex: 0 1 5000px;
+      overflow: hidden
+    }
+
+    .profile-tabs {
+      padding: .75rem 1.5rem 0;
+      background: #f7f7f9;
+      border-top: 1px solid #eceeef
+    }
+
+    .profile-tabs .nav-link {
+      font-weight: 400;
+      padding: .75rem 1.5rem
+    }
+
+    .profile-tabs .nav-link.active,
+    .profile-tabs .nav-link.active:focus,
+    .profile-tabs .nav-link.active:hover,
+    .profile-tabs .nav-link:active,
+    .profile-tabs .nav-link:focus {
+      color: #60c84c
+    }
+
+    .profile-tabs-content .tab-pane {
+      padding: 1.5rem
+    }
+
+    .post-editor .post-field {
+      width: 100%;
+      height: 120px;
+      resize: vertical;
+      border-radius: .25rem;
+      margin-bottom: .5rem;
+      padding: .5rem;
+      border-color: #eceeef
+    }
+
+    .post-editor .post-field:focus {
+      box-shadow: none;
+      outline: none
+    }
+
+    .stream-post {
+      position: relative
+    }
+
+    .sp-content {
+      position: relative;
+      border-radius: .25rem;
+      background: #fff;
+      padding: 1rem;
+      margin-top: 1rem
+    }
+
+    .sp-content .sp-info {
+      font-size: .875rem;
+      color: #636c72;
+      position: absolute;
+      top: -3rem;
+      left: 80px
+    }
+
+    .sp-content .sp-paragraph {
+      font-size: 1rem;
+      line-height: 1.6;
+      margin-bottom: 1rem
+    }
+
+    .sp-content .sp-paragraph:last-child {
+      margin-bottom: 0
+    }
+
+    .sp-content .sp-gallery img {
+      margin-right: .5rem;
+      margin-bottom: .5rem;
+      max-width: 220px;
+      max-height: 130px
+    }
+
+    .sp-content .sp-video {
+      width: 100%;
+      height: auto
+    }
+
+    @media (min-width:992px) {
+      .sp-content {
+        margin-left: 80px;
+        margin-top: 0
+      }
+
+      .sp-content .sp-info {
+        position: static;
+        font-style: italic;
+        margin-bottom: 1rem
+      }
+    }
+
+
+
+    #profile-settings textarea {
+      padding: 1rem;
+      line-height: 1.8;
+      height: 140px;
+      font-style: italic
+    }
+
+    #profile-settings label {
+      font-size: 1rem
+    }
+
+    #profile-settings .form-control {
+      color: #818a91
+    }
+
+    #profile-settings .form-control,
+    #profile-settings .form-control:focus {
+      box-shadow: none;
+      outline: none
+    }
+
+    .edit-cover {
+      position: relative;
+      padding: .5rem;
+      border-radius: .25rem;
+      border: 1px solid #eceeef;
+      background: #f7f7f9;
+      height: 400px
+    }
+
+    .edit-cover img {
+      border-radius: .25rem;
+      width: 100%;
+      height: 100%
+    }
+
+    .edit-cover .btn {
+      position: absolute;
+      right: 32px;
+      bottom: 32px
+    }
+
+    .deletebutton {
+      background-color: none;
+      border-style: none;
+      float: right;
+      -ms-transform: rotate(7deg);
+      -webkit-transform: rotate(7deg);
+      transform: rotate(7deg);
+      border-radius: 180px;
+      margin-right: 30px;
+    }
+
+    .deletebutton:hover {
+      -ms-transform: rotate(10deg);
+      -webkit-transform: rotate(10deg);
+    }
+
+    video {
+      width: 100%;
+      height: 60%;
+    }
+
+    .card {
+      padding: 26px;
+      border: none;
+      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    }
+
+    #post_comment {
+      border-radius: 8px;
+      transition-delay: 100ms;
+      border-width: 1px;
+      font-size: 12px;
+    }
+
+    #post_comment:hover {
+      height: 70px;
+      transition-delay: 100ms;
+
+    }
+
+    #comment-box {
+      background-color: #ffffff;
+      position: relative;
+      padding: 1px;
+      color: rgb(0, 0, 0);
+      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+      width: fit-content;
+      padding: 12px;
+      margin-right: 22px;
+      font-size: 12px;
+      margin: 24px;
+    }
+
+    #comment-box::after {
+      content: "";
+      position: absolute;
+      height: 25px;
+      width: 25px;
+      bottom: -25px;
+      left: 80%;
+      clip-path: polygon(0 0, 100% 0, 100% 100%);
+      background-color: #ffffff;
+    }
+
+    #comment-box:hover {
+      box-shadow: none;
+    }
+
+
+    .commentbutton {
+      min-width: 70px;
+      min-height: 35px;
+      font-family: 'Nunito', sans-serif;
+      font-size: 14px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-weight: 500;
+      color: #ffffff;
+      background: linear-gradient(90deg, rgba(0, 0, 0, 0.753), rgba(0, 0, 0, 0.753));
+      border: none;
+      border-radius: 4px;
+      box-shadow: 1px 2px 2px rgba(0, 0, 0, 0.753);
+      transition: all 0.3s ease-in-out 0s;
+      cursor: pointer;
+      outline: none;
+      position: relative;
+      margin-right: 35px;
+
+
+    }
+
+    .commentbutton:hover,
+    .commentbutton:focus {
+      color: #ffffff;
+      transform: translateY(-1px);
+    }
+
+    .commentbtn:hover::before,
+    .commentbtn:focus::before {
+      opacity: 1;
+    }
+
+    .commentbtn:hover::after,
+    .commentbtn:focus::after {
+      animation: none;
+      display: none;
+    }
+
+    .comment {
+      border-radius: 16px;
+      width: 350px;
+    }
+
+    .postby {
+      opacity: .5;
+      font-style: italic;
+      font-size: smaller;
+    }
+
+    .postbytext {
+      font-weight: 100;
+      background-image: linear-gradient(to left, rgb(255, 255, 255), rgb(253, 200, 200));
+      font-weight: 400;
+      margin-right: 40px;
+      padding: 5px;
+      width: auto;
+    }
+
+    .postbytext:hover {
+      font-weight: 100;
+    }
+
+    .card__footer {
+      display: flex;
+      margin-top: auto;
+      opacity: 0.4;
+      font-size: 10px;
+      align-content: flex-start;
+      padding-top: 20px;
+    }
+
+    .container {
+      border: none;
+      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    }
+
+    li {
+      display: none;
+    }
+
+    .textpost {
+      padding: 20px;
+      border-style: solid;
+      border-width: 5px;
+      border-color: rgba(253, 198, 198, 0.479);
+
+    }
+
+    @media screen and (max-width: 699px) {
+      .textpost {
+        font-size: xx-large;
+      }
+      .text {
+        font-size: small;
+    }
+  }
+
+    @media screen and (max-width: 700px) {
+      .textpost {
+        font-size: small;
+      }
+      .text {
+        font-size: small;
+      }
+    }
+    .textdescription{
+      padding: 26px;
+      background-color: rgba(255, 212, 212, 0.384);
+    }
+    .commentdiv{
+      padding-left: 10px;
+    }
+    .smallview{
+      box-shadow: 0 4px 8px 0  #ffa0a0;
+      padding: 20px;
+      margin: 20px;
+      width:60%;
+      height:60%;
+    }
+  </style>
+</head>
+
+<body>
+  
+  {% block body %}
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+  <div class="container">
+    <div class="profile-wrapper">
+      <div class="profile-section-user">
+        <div class="profile-cover-img"><img style="opacity:0.3" src="https://i.pravatar.cc/150?img={{ user.id }}"
+            alt=""></div>
+        <div class="profile-info-brief p-3">
+          <img class="img-fluid user-profile-avatar" src="https://i.pravatar.cc/150?img={{ user.id }}" alt="">
+          <div class="text-center">
+            <h5 class="text-uppercase mb-4">{{ user }}</h5>
+          </div>
+        </div>
+        <!-- /.profile-info-brief -->
+        <hr class="m-0">
+        <div class="hidden-sm-down">
+          <hr class="m-0">
+          <div class="profile-info-contact p-4">
+            <h6 class="mb-3">Contact Information</h6>
+            <table class="table">
+              <tbody>
+                <tr>
+                  <td><strong>EMAIL:</strong></td>
+                  <td>
+                    <p class="text-muted mb-0">{{ user.email }}</p>
+                  </td>
+                  <td>
+                    <br><br><br>
+                    <a href="{% url 'app:logout' %}" %}">Logout</a>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <!-- /.hidden-sm-down -->
+      </div>
+      <!-- /.profile-section-user -->
+      <div class="profile-section-main">
+        <!-- Nav tabs -->
+        <div class="w3-bar w3-black">
+          <button class="w3-bar-item w3-button tablink w3-pale-red" onclick="openCity(event,'London')">All
+            Posts</button>
+          <button class="w3-bar-item w3-button tablink" onclick="openCity(event,'Paris'); ">My Posts</button>
+          <button class="w3-bar-item w3-button tablink" onclick="openCity(event,'Tokyo')">General</button>
+        </div>
+
+        <!-- /.nav-tabs -->
+        <!-- Tab panes -->
+        <div class="tab-content profile-tabs-content">
+          <div id="London" class="w3-container  city">
+            <div class="tab-pane active" id="allpost" role="tabpanel">
+              <div class="post-editor">
+
+                <div class="d-flex">
+                  <div id="box">
+                    <span id="button">Upload <i class="fa fa-upload"></i></span>
+                    <form action="." method="post" enctype="multipart/form-data" id="post_form">
+                      {% csrf_token %}
+                      {{ form.as_p }}
+                      <input type="file" id="post_file" name="post_file" onchange="Filevalidation()" />
+                      <textarea id="post_content" name="post_content" style="display: none"></textarea>
+                      <input type="submit" value="Post" id="button" value="reset()" />
+                    </form>
+                  </div>
+                </div>
+              </div>
+              {% for post in post_data reversed %}
+              <!-- /.post-editor -->
+
+
+              <div class="sp-author">
+              </div>
+              <div class="sp-content">
+                <div class="row">
+                  <div class="column">
+                    <div class="card ">
+                      <div class="card-header">
+
+
+                        <p class="postby">Posted by {{ post.user }} {{index}}</p>
+                        <!-- <p>Post ID: {{ post.id }}</p> -->
+                        <br>
+                        <p class="postbytext text"><span class="postby">Title</span>&nbsp;{{ post.title }}</p>
+
+                        {% if post.type_of_media == '1' %}
+                        <img src="{{post.base64}}" style="width:100%">
+                        {% elif post.type_of_media == '2' %}
+                        <video width="320" height="240" controls>
+                          <source src="{{post.base64}}" type="video/mp4" style="width:100%">
+                        </video>
+                        {% elif post.type_of_media == '3' %}
+                        <p class="textpost"> {{post.media}}</p>
+                        {% endif %}
+                        <p style="padding-top: 16px;">
+                          <i class="fa fa-thumbs-up likebutton" data-postid="{{post.id}}" data-like="{{post.is_liked}}"
+                            onclick="likeOrDislike(event)"></i>{{ post.likes }}
+                        </p>
+                      </div>
+                      <p class="text textdescription"><span class="postby">Description</span> {{ post.description }}</p>
+                      <div class="commentdiv">
+                      <small style="opacity: 0.5"><i>Comment box</i></small>
+                      <form action="." method="post" onsubmit="comment(event)">
+                        {% csrf_token %}
+                        <input type="hidden" value="{{ post.id }}" name="post_id" />
+                        <div style=" margin-right:38px ">
+                          <input id="commenttext" name="post_comment" class="w3-input w3-animate-input" type="text"
+                            style="width:135px; float: left; font-size: 12px;" />
+                        </div>
+                        <input type="submit" name="submit" class="commentbutton commentbtn" value="Send" style="" />
+                        <br><br>
+
+                      </form>
+                      </div>
+
+                      {% for c in post.comments reversed %}
+                      <div class="user" id="comment-box">
+                        <form action="." method="post">
+                          {% csrf_token %}
+                          {% if c.user.id == user.id %}
+                          <input type="hidden" value="{{ c.id }}" name="delete_comment_id" />
+                          <button class="deletebutton" type="submit"><i style="font-size:16px"
+                              class="fa">&#xf014;</i></button>
+                          {% endif %}
+                        </form>
+                        <div class="">
+                          <u class="">
+                            <h6> {{ c.user }} </h6>
+                          </u><br>
+                          <small>Commented </small>"{{ c.text }}"<br>
+                        </div>
+                       
+                      </div>
+                      {% endfor %}
+
+                      <div class="card__footer">
+                        <p>Created at : {{ post.created_at }}</p>
+                      </div>
+                      
+                      <!-- /.sp-content -->
+                    </div>
+                    <!-- /.stream-post -->
+                  </div>
+                </div>
+              </div>
+
+              {% endfor %}
+              <!-- /.stream-posts -->
+            </div>
+          </div>
+
+
+
+
+
+          <div id="Paris" class="w3-container w3-border city" style="display:none">
+            <h2>My posts</h2>
+            <div class="tab-pane active" id="allpost" role="tabpanel">
+              
+              {% for post in post_data reversed %}
+              <!-- /.post-editor -->
+              
+              {% if post.user == user %}
+              <div class="smallview">
+                <form action="." method="post">
+                  {% csrf_token %}
+                  <input type="hidden" value="{{ post.id }}" name="delete_post_id" />
+                  <button class="deletebutton" type="submit"><i style="font-size:24px" class="fa">&#xf014;</i></button>
+                  </input>
+                </form>
+              <p class="postbytext"><span class="postby">Title</span>&nbsp;{{ post.title }}</p>            
+                  {% if post.type_of_media == '1' %}
+                  <img src="{{post.base64}}" style="width:100%">
+                  {% elif post.type_of_media == '2' %}
+                  <video width="320" height="240" controls>
+                    <source src="{{post.base64}}" type="video/mp4" style="width:100%">
+                  </video><br><br>
+                  {% elif post.type_of_media == '3' %}
+                  <p> {{post.media}}</p>
+                  {% endif %}
+                    
+              <p>
+                Likes {{ post.likes }}
+              </p>
+
+              <p><span class="postby">Description</span> {{ post.description }}</p>
+
+              {% for c in post.comments reversed %}
+              <div class="user" id="comment-box">
+              <u class="">
+                <h6> {{ c.user }} </h6>
+              </u><br>
+              <form action="." method="post">
+                {% csrf_token %}
+                {% if c.user.id == user.id %}
+                <input type="hidden" value="{{ c.id }}" name="delete_comment_id" />
+                <button class="deletebutton" type="submit"><i style="font-size:16px" class="fa">&#xf014;</i></button>
+                {% endif %}
+              </form>
+              <small>Commented </small>"{{ c.text }}"<br>
+            </div>
+              {% endfor %}
+              <p>Created at : {{ post.created_at }}</p>             
+             
+            </div> 
+            {% endif %}
+              {% endfor %}
+              <!-- /.stream-posts -->
+            
+          </div>
+        </div>
+      </div>
+      <!-- /.tab-content -->
+    </div>
+    <!-- /.profile-section-main -->
+  </div>
+  </div>
+  <div class="tab-pane active city" id="mypost" role="tabpanel">
+  </div>
+
+  {% endblock %}
+
+  <script>
+    document.querySelector('select[name="type_of_media"]')
+      .addEventListener('change', (e) => {
+        switch (e.target.value) {
+          case '1':
+            document.getElementById('post_content').style.display = "none";
+            document.getElementById('post_file').style.display = "block";
+          case '2':
+            document.getElementById('post_content').style.display = "none";
+            document.getElementById('post_file').style.display = "block";
+            break;
+          case '3':
+            document.getElementById('post_content').style.display = "block";
+            document.getElementById('post_file').style.display = "none";
+            break;
+        }
+      });
+
+    $(document).on('click', '#button', function (e) {
+      if ($("#box form").is(":visible")) {
+        $("#box form").slideUp();
+        let fd = new FormData($("#box form")[0]);
+        fetch('.', {
+          method: 'POST',
+          body: fd
+        })
+          .then(async (response) => {
+            document.getElementsByTagName("html")[0].innerHTML = await response.text();
+          })
+
+      } else {
+        document.getElementById('post_file').style.display = "none";
+        $("#box form").slideDown();
+      }
+      document.getElementById('id_title').value = "";
+      document.getElementById('id_description').value = "";
+      document.getElementById('post_file').value = "";
+      document.getElementById('post_content').value = "";
+      return false;
+    });
+
+    // $(document).on('click', '#viewbutton', function () {
+    //   $("#comment-main-box ").toggle("slow");
+    //   return false;
+    // });
+    $(document).on('submit', '#post_form', function (e) {
+      console.log(e)
+    });
+    function likeOrDislike(ev) {
+      let like = ev.target.dataset.like;
+      let postid = ev.target.dataset.postid;
+
+      let fd = new FormData();
+      fd.append("post_id", postid);
+      fd.append("like", like)
+      fetch('.', {
+        method: 'POST',
+        body: fd
+      })
+        .then(async (response) => {
+          document.getElementsByTagName("html")[0].innerHTML = await response.text();
+          ev.classList.toggle("fa-thumbs-down");
+
+        })
+    }
+    function comment(ev) {
+      ev.preventDefault();
+      let fd = new FormData(ev.target);
+      fetch('.', {
+        method: 'POST',
+        body: fd
+      })
+        .then(async (response) => {
+          document.getElementsByTagName("html")[0].innerHTML = await response.text();
+        })
+        document.getElementById('commenttext').value = "";
+
+    }
+
+    // const arrowButton = document.querySelectorAll(".menu-arrow");
+
+    // arrowButton.forEach((el) =>
+    //   el.addEventListener("click", (event) => {
+    //     const subMenu = event.target.parentElement.querySelector(".sub-menu");
+    //     subMenu.classList.toggle("open");
+    //   })
+    // );
+    // function myFunction(x, isliked) {
+    //   if(isliked == 1){
+    //     x.classList.toggle("fa-thumbs-down");
+
+    // }
+    Filevalidation = () => {
+      const fi = document.getElementById('post_file');
+      // Check if any file is selected.
+      if (fi.files.length > 0) {
+        for (const i = 0; i <= fi.files.length - 1; i++) {
+
+          const fsize = fi.files.item(i).size;
+          const file = Math.round((fsize / 1024));
+          // The size of the file.
+          if (file >= 4096) {
+            alert(
+              "File too Big, please select a file less than 4mb");
+            document.getElementById('post_file').value = "";
+          } else {
+            document.getElementById('size').innerHTML = '<b>'
+              + file + '</b> KB';
+          }
+        }
+      }
+    }
+    function openCity(evt, cityName) {
+      var i, x, tablinks;
+      x = document.getElementsByClassName("city");
+      for (i = 0; i < x.length; i++) {
+        x[i].style.display = "none";
+      }
+      tablinks = document.getElementsByClassName("tablink");
+      for (i = 0; i < x.length; i++) {
+        tablinks[i].className = tablinks[i].className.replace(" w3-pale-red", "");
+      }
+      document.getElementById(cityName).style.display = "block";
+      evt.currentTarget.className += " w3-pale-red";
+    }
+
+    // Add active class to the current button (highlight it)
+    var header = document.getElementById("myHeader");
+    var btns = header.getElementsByClassName("btn");
+    for (var i = 0; i < btns.length; i++) {
+      btns[i].addEventListener("click", function () {
+        var current = document.getElementsByClassName("active");
+        current[0].className = current[0].className.replace(" active", "");
+        this.className += " active";
+      });
+    }
+  </script>
+  
+</body>
+
+</html>
